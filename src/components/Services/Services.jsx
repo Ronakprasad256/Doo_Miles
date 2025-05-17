@@ -62,7 +62,7 @@ const Services = () => {
                                     key={skills.name}
                                     data-aos="fade-up"
                                     data-aos-delay={skills.aosDelay}
-                                    className='card text-center group
+                                    className='cursor-pointer card text-center group
                                 space-y-3 sm:space-y-6 py-4
                                 sm:py-16 bg-dark hover:bg-primary
                                 duration-300 text-white
