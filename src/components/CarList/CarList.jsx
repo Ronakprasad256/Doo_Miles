@@ -35,7 +35,7 @@ const CarList = () => {
                     className='text-3xl 
             sm:text-4xl
             font-semibold font-serif mb-3'
-                >Lorem ipsum dolor.
+                >Choose Your Ride For Miles
                 </h1>
                 <p data-aos="fade-up" 
                 className='text-sm pb-10'>
@@ -44,13 +44,17 @@ const CarList = () => {
                 adipisicing elit. Ducimus, facilis!</p>
                 {/* car listing cards */}
                 <div>
-                    <div className='grid 
+                    <div
+                    className='grid 
                 grid-cols-1
                 sm:grid-cols-2 
                 md:grid-cols-3 gap-16'>
                         {
                             CarListData.map((data) => {
-                                return(<div className='space-y-3 border-2
+                                return(<div
+                                    data-aos="fade-up"
+                                    data-aos-duration={data.aosDelay}
+                                    className='space-y-3 border-2
                                 border-gray-300 hover:border-primary cursor-pointer
                                 p-3 rounded-xl relative group
                                 '>
@@ -80,6 +84,13 @@ const CarList = () => {
                             })
                         }
                     </div>
+                </div>
+                <div className='grid place-content-center
+                mt-8
+                '>
+                    <button
+                    data-aos="fade-up"
+                    className='button-outline'>Get Started</button>
                 </div>
             </div>
         </div>
