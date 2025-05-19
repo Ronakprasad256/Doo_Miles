@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FaSun, FaMoon, FaLocationDot } from "react-icons/fa6";
-import "./Navbar.css"
+import "./Navbar.css";
+import { auth, provider } from '../Firebase';
+import { signInWithPopup, signOut } from "firebase/auth";
 
 const NavLinks = [
   { id: "1", name: "HOME", link: "/#" },
@@ -10,10 +12,43 @@ const NavLinks = [
 ];
 
 const Navbar = ({ theme, setTheme }) => {
+  const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const loggedUser = {
+        name: result.user.displayName,
+        email: result.user.email,
+        photoURL: result.user.photoURL,
+      };
+      setUser(loggedUser);
+      localStorage.setItem('user', JSON.stringify(loggedUser));
+    } catch (error) {
+      console.error("Google Sign-In Error:", error.code, error.message);
+      alert(`Sign-in failed: ${error.message}`);
+    }
+  };
+
+  const handleLogout = () => {
+    signOut(auth);
+    setUser(null);
+    localStorage.removeItem('user');
+    setDropdownOpen(false);
+  };
+
   const [locationName, setLocationName] = useState("No location fetched");
   const [locationEnabled, setLocationEnabled] = useState(false);
 
-  // Load saved state on page load
   useEffect(() => {
     const enabled = localStorage.getItem("locationEnabled") === "true";
     const savedLocation = localStorage.getItem("locationName");
@@ -28,7 +63,6 @@ const Navbar = ({ theme, setTheme }) => {
     }
   }, []);
 
-  // Fetch location and reverse geocode it
   const fetchLocation = () => {
     if (!navigator.geolocation) {
       alert("Geolocation is not supported by your browser.");
@@ -60,7 +94,6 @@ const Navbar = ({ theme, setTheme }) => {
     );
   };
 
-  // Handle toggle switch
   const handleLocationToggle = () => {
     const newState = !locationEnabled;
     setLocationEnabled(newState);
@@ -75,67 +108,167 @@ const Navbar = ({ theme, setTheme }) => {
   };
 
   return (
-    <nav className='shadow-md bg-white dark:bg-dark dark:text-white duration-100'>
-      <div className="container md:py-0">
+    <nav className='shadow-md bg-white dark:bg-dark dark:text-white duration-100 relative z-50'>
+      <div className=" md:py-0">
         <div className="flex justify-between items-center flex-wrap gap-4 py-2 px-4">
-          {/* Logo */}
-          <div>
+          {/* Left: Logo + Location */}
+          <div className="flex items-center gap-4">
             <img 
               src="/logo.png" 
-              className="w-[100px] h-[80px] sm:w-[120px] sm:h-[90px] md:w-[130px] md:h-[100px]" 
+              className="w-[60px] h-[50px] sm:w-[120px] sm:h-[90px] md:w-[110px] md:h-[80px]" 
               alt="Logo" 
             />
-          </div>
 
-          {/* Navigation Links */}
-          <div className='hidden md:block'>
-            <ul className='flex items-center gap-8'>
-              {NavLinks.map((data) => (
-                <li key={data.id} className='py-4'>
-                  <a
-                    className='inline-block py-2 border-b-2 border-transparent hover:border-primary hover:text-primary transition-colors duration-500 text-lg font-medium'
-                    href={data.link}
-                  >
-                    {data.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Location Toggle + Theme */}
-          <div className='flex items-center gap-4'>
-            {/* Toggle + Location Display */}
+            {/* Location Toggle */}
             <div className="flex items-center gap-2">
-  {/* Custom toggle switch */}
-  <input
-    type="checkbox"
-    id="checkboxInput"
-    checked={locationEnabled}
-    onChange={handleLocationToggle}
-    className="hidden-checkbox"
-  />
-  <label htmlFor="checkboxInput" className="toggleSwitch"></label>
-
-  {/* Location text and icon */}
-  <div className='text-sm max-w-[160px] truncate flex items-center gap-1'>
-    <span className='truncate'>{locationName}</span>
-    <FaLocationDot className="text-blue-500" />
-  </div>
-</div>
-
-
-            {/* Theme Toggle Dark & Light Mode*/}
-            <div className='cursor-pointer text-xl'>
-              {theme === "dark" ? (
-                <FaSun onClick={() => setTheme("light")} />
-              ) : (
-                <FaMoon onClick={() => setTheme("dark")} />
-              )}
+              <input
+                type="checkbox"
+                id="checkboxInput"
+                checked={locationEnabled}
+                onChange={handleLocationToggle}
+                className="hidden-checkbox"
+              />
+              <label htmlFor="checkboxInput" className="toggleSwitch"></label>
+              <div className='text-sm max-w-[160px] truncate flex items-center gap-1'>
+                <span className='truncate'>{locationName}</span>
+                <FaLocationDot className="text-blue-500" />
+              </div>
             </div>
+          </div>
+
+          {/* Right Side: Desktop links or mobile hamburger */}
+          <div className='flex items-center gap-4'>
+            {/* Desktop Links */}
+            <div className='hidden md:flex items-center gap-8'>
+              <ul className='flex items-center gap-8'>
+                {NavLinks.map((data) => (
+                  <li key={data.id} className='py-4'>
+                    <a
+                      className='inline-block py-2 border-b-2 border-transparent hover:border-primary hover:text-primary transition-colors duration-500 text-lg font-medium'
+                      href={data.link}
+                    >
+                      {data.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Theme Toggle */}
+              <div className='cursor-pointer text-xl'>
+                {theme === "dark" ? (
+                  <FaSun onClick={() => setTheme("light")} />
+                ) : (
+                  <FaMoon onClick={() => setTheme("dark")} />
+                )}
+              </div>
+
+              {/* User Auth */}
+              <div className="relative">
+                {!user ? (
+                  <button
+                    onClick={handleGoogleSignIn}
+                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                  >
+                    Sign In
+                  </button>
+                ) : (
+                  <div className="relative">
+                    <img
+                      src={user.photoURL}
+                      alt="Profile"
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300"
+                    />
+
+                    {dropdownOpen && (
+                      <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg p-3 z-50 dark:bg-dark dark:text-white">
+                        <p className="font-semibold mb-2">{user.name}</p>
+                        <button className="w-full text-left py-1 hover:text-blue-500">
+                          Your Bookings
+                        </button>
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-left py-1 text-red-500 hover:underline"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Mobile: Hamburger (right corner) */}
+            <button
+              className='block md:hidden text-2xl'
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              &#9776;
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Drawer Menu */}
+      {menuOpen && (
+        <div className="fixed top-0 right-0 w-64 h-full bg-white dark:bg-dark shadow-lg z-50 p-6 flex flex-col gap-4 transition-transform duration-300 md:hidden">
+          <button className="self-end text-xl mb-4" onClick={() => setMenuOpen(false)}>✕</button>
+
+          
+
+          <div className='mt-4 flex items-center gap-2'>
+            <span className='font-medium'>Mode:</span>
+            <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="text-xl">
+              {theme === "dark" ? <FaSun /> : <FaMoon />}
+            </button>
+          </div>
+
+          <div className="mt-6">
+            {!user ? (
+              <button
+                onClick={handleGoogleSignIn}
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+              >
+                Sign In
+              </button>
+            ) : (
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <img src={user.photoURL} className="w-10 h-10 rounded-full" alt="User" />
+                  <span className="font-medium">{user.name}</span>
+                </div>
+                <button className="block text-left py-1 hover:text-blue-500">Your Bookings</button>
+                {/* <button
+                  onClick={handleLogout}
+                  className="block text-left py-1 text-red-500 hover:underline"
+                >
+                  Logout
+                </button> */}
+              </div>
+            )}
+          </div>
+          <ul className='flex flex-col gap-4'>
+            {NavLinks.map((data) => (
+              <li key={data.id}>
+                <a
+                  href={data.link}
+                  className="text-lg hover:text-primary transition"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {data.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <button
+                  onClick={handleLogout}
+                  className="block text-left py-1 text-red-500 hover:underline"
+                >
+                  Logout
+                </button>
+        </div>
+      )}
     </nav>
   );
 };
