@@ -7,6 +7,7 @@
         @apply rounded-md border-2
         border-primary hover:bg-primary/80
         hover:text-black duration-500 py-2
-         px-6 text-primary tracking-wider;
+         px-6 text-black tracking-wider
+         dark:text-primary;
     }
 } 

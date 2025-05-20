@@ -13,7 +13,7 @@ const skillData = [
         duration-300" />
         ),
         link: "#",
-        description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, tempora.",
+        description: "Affordable rates without compromising on quality or comfort.",
         aosDelay: "0",
     },
     {
@@ -24,7 +24,7 @@ const skillData = [
         duration-300" />
         ),
         link: "#",
-        description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, tempora.",
+        description: "Quick service with a strong focus on your safety.",
         aosDelay: "0",
     },
     {
@@ -35,7 +35,7 @@ const skillData = [
         duration-300" />
         ),
         link: "#",
-        description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, tempora.",
+        description: "Friendly, professional drivers who know the city inside out.",
         aosDelay: "0",
     },
 
@@ -72,7 +72,7 @@ const Services = () => {
                                     <div className='grid place-items-center'>{skills.icon}</div>
                                     <h1>{skills.name}</h1>
                                     <p>{skills.description}</p>
-                                    <a href={skills.link}>Learn More</a>
+                                    {/* <a href={skills.link}>Learn More</a> */}
                                 </div>
                             ))}
                     </div>

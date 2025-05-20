@@ -33,14 +33,8 @@ const CarList = () => {
                     data-aos="fade-up"
                     className='text-3xl sm:text-4xl font-semibold font-serif mb-3'
                 >
-                    Choose Your Ride For Miles
+                    Miles of Smiles Begin with Your Ride
                 </h1>
-                <p
-                    data-aos="fade-up"
-                    className='text-sm pb-10'
-                >
-                    Lorem, ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, facilis!
-                </p>
                 {/* car listing cards */}
                 <div>
                     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16'>

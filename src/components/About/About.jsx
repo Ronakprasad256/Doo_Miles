@@ -1,5 +1,5 @@
 import React from 'react'
-import CarPng from "/jeep.png"
+import CarPng from "/logo.png"
 
 const About = () => {
     return (
@@ -36,12 +36,16 @@ const About = () => {
                             <p
                             data-aos="fade-up"
                             >
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid optio ratione officiis.
+                                Welcome to your trusted local car rental service, right here in our small but vibrant city.
+We make transportation easy, affordable, and reliable for residents and visitors alike.
+Whether it's for daily errands or weekend getaways, we’ve got the perfect ride for you.
                             </p>
                             <p
                             data-aos="fade-up"
                             >
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, eos.
+                                Choose from a range of well-maintained vehicles suited for city roads and beyond.
+Our quick booking process and friendly service ensure a smooth experience every time.
+Drive with confidence, knowing support is just around the corner—literally.
                             </p>
                             <button
                             data-aos="fade-up"
