@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-// import carPng from "/swiftg.png";
-// import yellowCarPng from "/swiftg.png";
+import carPng from "/darkcar.png";
 import chatGptImage from "/swiftg.png";
 
 const Hero = ({ theme }) => {
@@ -30,7 +29,7 @@ const Hero = ({ theme }) => {
                     >
                         {/* Moving car animation */}
                         <img 
-                            src={theme === "dark" ? chatGptImage : chatGptImage} 
+                            src={theme === "dark" ? carPng : chatGptImage} 
                             alt="car"
                             className='moving-car relative -z-10 max-h-[600px] sm:scale-125 drop-shadow-[2px_20px_6px_rgba(0,0,0,0.50)]' 
                         />
