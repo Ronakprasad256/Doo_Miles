@@ -110,7 +110,7 @@ const Footer = () => {
         {/* Footer Bottom Text */}
         <div className='dark:bg-dark dark:text-white text-black text-center text-sm py-4 mt-4 rounded-b-3xl'>
             <p className='px-2'>
-                © 2025 <span className='font-semibold'>3AR Entertainmet</span>. All Rights Reserved.
+                © 2025 <span className='font-semibold'>Doo Miles</span>. All Rights Reserved.
                 <span className='hidden sm:inline'> | Developed by <span className='font-semibold'>.LITE TECH ☯</span></span>
             </p>
         </div>

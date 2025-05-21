@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import carPng from "/darkcar.png";
-import chatGptImage from "/swiftg.png";
+import chatGptImage from "/swift.png";
 
 const Hero = ({ theme }) => {
     useEffect(() => {
@@ -19,9 +19,10 @@ const Hero = ({ theme }) => {
     }, []);
 
     return (
-        <div className='dark:bg-black dark:text-white duration-100 relative -z-20'>
+        <div className='dark:bg-black dark:text-white duration-100 relative-z-20'>
             <div className="container min-h-[620px] flex">
-                <div className='grid place-items-center grid-cols-1 sm:grid-cols-2'>
+                <div className='grid items-start text-left sm:place-items-center grid-cols-1 sm:grid-cols-2'>
+
                     <div
                         data-aos='zoom-in'
                         data-aos-duration="1500"

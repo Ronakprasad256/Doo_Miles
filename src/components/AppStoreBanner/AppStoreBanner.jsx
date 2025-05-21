@@ -7,8 +7,8 @@ const bannerImg = {
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
-    height: "100%",
-    width: "100%",
+    // height: "100%",
+    // width: "100%",
 }
 
 const AppStoreBanner = () => {
