@@ -17,7 +17,7 @@ const TestimonialsData = [
     name: "Rohan Verma",
     image: "",
     description: "From start to finish, the process was smooth and hassle-free. Great experience!",
-    aosDelay: "1000"
+    aosDelay: "500"
   },
 ]
 

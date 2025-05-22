@@ -8,21 +8,21 @@ const CarListData = [
         name: "Swift",
         price: 1200,
         image: whiteCar,
-        aosDelay: "0",
+        aosDelay: "300",
         km: "16KM"
     },
     {
         name: "Scorpio",
         price: 1500,
         image: scor,
-        aosDelay: "500",
+        aosDelay: "400",
         km: "14KM"
     },
     {
         name: "Eon",
         price: 900,
         image: eon,
-        aosDelay: "1000",
+        aosDelay: "500",
         km: "18KM"
     },
 ]

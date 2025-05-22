@@ -13,7 +13,7 @@ const About = () => {
             ">
                     <div
                     data-aos="slide-right"
-                    data-aos-duration="1500"
+                    data-aos-duration="300"
                     // data-aos-once="false"
                     >
                         <img src={CarPng} alt=""

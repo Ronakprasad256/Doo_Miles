@@ -52,7 +52,7 @@ const Hero = ({ theme }) => {
                         </h1>
                         <p
                             data-aos='fade-up'
-                            data-aos-delay="1000"
+                            data-aos-delay="400"
                         >
                             Miles of Smiles Begin with Your Ride
                         </p>
