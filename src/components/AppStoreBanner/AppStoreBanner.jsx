@@ -7,8 +7,8 @@ const bannerImg = {
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
-    // height: "100%",
-    // width: "100%",
+    height: "100%",
+    width: "100%",
 }
 
 const AppStoreBanner = () => {
@@ -36,7 +36,7 @@ const AppStoreBanner = () => {
                     </p>
                     <div className="flex flex-wrap justify-center items-center" data-aos="fade-up">
                         <a href="#">
-                            <img className='max-w-[150px] sm:max-w-[120px] md:max-w-[200px]' src={playstore} alt="Get it on Play Store" />
+                            <img className='max-w-[200px] sm:max-w-[120px] md:max-w-[200px]' src={playstore} alt="Get it on Play Store" />
                         </a>
                     </div>
                 </div>

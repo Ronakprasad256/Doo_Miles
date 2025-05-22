@@ -20,9 +20,9 @@ const Contact = () => {
                 <div className='grid place-items-center'>
                     <a href="#"
                     className='inline-block
-                    font-semibold py-2 px-6 bg-primary text-white
+                    font-semibold py-2 px-6 bg-primary text-black
                     rounded-lg tracking-wider uppercase
-                    hover:bg-primary/80 duration-300
+                    hover:bg-primary/80 duration-300 hover:text-white
                     '
                     >Contact</a>
                 </div>

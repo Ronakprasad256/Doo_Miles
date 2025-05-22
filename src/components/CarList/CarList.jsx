@@ -1,26 +1,29 @@
 import React from 'react'
-import whiteCar from "/bmw.png"
+import whiteCar from "/swift1.png"
 import scor from "/scor.png"
-import scorpio from "/scorpio.png"
+import eon from "/eon.png"
 
 const CarListData = [
     {
-        name: "BMW UX",
-        price: 100,
+        name: "Swift",
+        price: 1200,
         image: whiteCar,
         aosDelay: "0",
+        km: "16KM"
     },
     {
-        name: "KIA UX",
-        price: 140,
+        name: "Scorpio",
+        price: 1500,
         image: scor,
         aosDelay: "500",
+        km: "14KM"
     },
     {
-        name: "BMW UX",
-        price: 120,
-        image: scorpio,
+        name: "Eon",
+        price: 900,
+        image: eon,
         aosDelay: "1000",
+        km: "18KM"
     },
 ]
 
@@ -31,13 +34,14 @@ const CarList = () => {
                 {/* heading */}
                 <h1
                     data-aos="fade-up"
-                    className='text-3xl sm:text-4xl font-semibold font-serif mb-3'
+                    className='text-primary text-3xl sm:text-4xl font-semibold font-serif mb-3'
                 >
                     Miles of Smiles Begin with Your Ride
                 </h1>
+                <p>Let me know if you’d like variations for a specific tone—fun, professional, luxury, etc.</p>
                 {/* car listing cards */}
                 <div>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16 pt-14'>
                         {
                             CarListData.map((data, index) => {
                                 return (
@@ -57,11 +61,12 @@ const CarList = () => {
                                         <div className='space-y-2'>
                                             <h1 className='text-primary font-semiboldsem'>{data.name}</h1>
                                             <div className='flex justify-between items-center text-xl font-semibold'>
-                                                <p>${data.price}/day</p>
-                                                <a href="#">Details</a>
+                                                <p>&#8377;
+{data.price}/day</p>
+                                                {/* <a href="#">Details</a> */}
                                             </div>
                                         </div>
-                                        <p className='text-xl font-semibold absolute top-0 left-3'>12Km</p>
+                                        <p className='text-xl font-semibold absolute top-0 left-3'>{data.km}</p>
                                     </div>
                                 );
                             })

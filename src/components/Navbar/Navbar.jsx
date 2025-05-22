@@ -182,8 +182,20 @@ const Navbar = ({ theme, setTheme }) => {
     fetchLocation();
   };
 
+  // Nav Sticky Effect
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className='shadow-md bg-white dark:bg-dark dark:text-white duration-100 relative z-50'>
+    <nav className='sticky top-0 shadow-md bg-white dark:bg-dark dark:text-white duration-100 z-50'>
       <div className="md:py-0">
         <div className="flex justify-between items-center flex-wrap gap-4 py-2 px-4">
           {/* Left: Logo + Location */}
